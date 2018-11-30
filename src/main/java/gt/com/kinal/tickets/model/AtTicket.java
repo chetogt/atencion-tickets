@@ -60,7 +60,7 @@ public class AtTicket implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
@@ -78,11 +78,18 @@ public class AtTicket implements Serializable {
         this.ticketId = ticketId;
     }
 
-    public AtTicket(Integer ticketId, String asunto, String descripcion, Character estado) {
+    public AtTicket(Integer ticketId, String asunto, String descripcion, String estado) {
         this.ticketId = ticketId;
         this.asunto = asunto;
         this.descripcion = descripcion;
         this.estado = estado;
+    }
+    
+    public AtTicket(String asunto, String descripcion, String estado, Date fechaCreacion) {
+        this.asunto = asunto;
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.fechaCreacion = fechaCreacion;
     }
 
     public Integer getTicketId() {
@@ -109,11 +116,11 @@ public class AtTicket implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

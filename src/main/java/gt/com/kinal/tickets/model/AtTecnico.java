@@ -53,7 +53,7 @@ public class AtTecnico implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "tecnicoId")
+    @OneToMany(mappedBy = "tecnico")
     private List<AtTicket> tickets;
 
     public AtTecnico() {
@@ -65,6 +65,11 @@ public class AtTecnico implements Serializable {
 
     public AtTecnico(Integer tecnicoId, String nombre, String email) {
         this.tecnicoId = tecnicoId;
+        this.nombre = nombre;
+        this.email = email;
+    }
+    
+    public AtTecnico(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
     }
