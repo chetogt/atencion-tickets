@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Atencion Tickets</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h1>Sistema para atención de Tickets</h1>
+	<h:form>
+            <h:outputLabel value="Asunto"/>
+            <h:inputText id="txtAsunto" />
+            <br/>
+            <h:outputLabel value="Descripcion"/>
+            <h:inputTextarea id="txtDescripcion" />
+            <br/>
+            <h:commandButton id="btnEnviar" value="Enviar" action="#{ticketsBacking.crearTicket}"/>
+        </h:form>
+    </h:body>
+</html>
+
