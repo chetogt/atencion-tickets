@@ -30,4 +30,9 @@ public class TicketsDao {
         
         return tickets;
     }
+    
+    public AtTicket save(AtTicket ticket) {
+        em.persist(ticket);
+        return ticket;
+    }
 }

@@ -5,7 +5,11 @@
  */
 package gt.com.kinal.tickets.views;
 
+import gt.com.kinal.tickets.model.AtTicket;
+import gt.com.kinal.tickets.service.TicketsServiceImpl;
+import java.util.Date;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -15,6 +19,9 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class TicketsBacking {
+    @Inject
+    TicketsServiceImpl ticketsService;
+    
     String asunto;
     String descripcion;
 
@@ -22,9 +29,16 @@ public class TicketsBacking {
     }
     
     public String crearTicket() {
-	System.out.println("Asunto: " + asunto);
-	System.out.println("Descripcion: " + descripcion);
-	return "crear-ticket.xhtml";
+	// validaciones
+        // completar campos obligatorios
+        AtTicket ticket = new AtTicket();
+        ticket.setAsunto(asunto);
+        ticket.setDescripcion(descripcion);
+        ticket.setEstado("C");
+        ticket.setFechaCreacion(new Date());
+        ticketsService.createTicket(ticket);
+        
+	return "crear-ticket.jsf";
     }
 
     public String getAsunto() {

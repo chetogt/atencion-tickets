@@ -23,4 +23,8 @@ public class TicketsServiceImpl {
     public List<AtTicket> getTickets() {
         return ticketsDao.getTickets();
     }
+    
+    public AtTicket createTicket(AtTicket ticket) {
+        return ticketsDao.save(ticket);
+    }
 }
