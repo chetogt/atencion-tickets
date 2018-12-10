@@ -8,18 +8,16 @@ package gt.com.kinal.tickets.service;
 import gt.com.kinal.tickets.dao.TicketsDao;
 import gt.com.kinal.tickets.model.AtTicket;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  *
  * @author jose
  */
 public class TicketsServiceImpl {
+    @Inject
     TicketsDao ticketsDao;
 
-    public TicketsServiceImpl() {
-        ticketsDao = new TicketsDao();
-    }
-    
     public List<AtTicket> getTickets() {
         return ticketsDao.getTickets();
     }

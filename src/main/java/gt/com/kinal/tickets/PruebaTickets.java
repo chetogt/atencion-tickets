@@ -10,6 +10,9 @@ import gt.com.kinal.tickets.model.AtTecnico;
 import gt.com.kinal.tickets.service.TicketsServiceImpl;
 import java.util.Date;
 import java.util.List;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.se.SeContainer;
+import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -27,9 +30,14 @@ public class PruebaTickets {
     TicketsServiceImpl ticketsService;
     
     public void probarEjb() {
-        ticketsService = new TicketsServiceImpl();
-        List<AtTicket> tickets = ticketsService.getTickets();
-        System.out.println("Tickets encontrados: " + tickets.size());
+        SeContainerInitializer initializer = SeContainerInitializer.newInstance();
+        try (SeContainer initialize = initializer.initialize()) {
+            Instance<TicketsServiceImpl> instance = initialize.select(TicketsServiceImpl.class);
+
+            TicketsServiceImpl ticketsService = instance.get();
+            List<AtTicket> tickets = ticketsService.getTickets();
+            System.out.println("Tickets encontrados: " + tickets.size());
+        }
     }
     
     public static void main(String[] args) {
