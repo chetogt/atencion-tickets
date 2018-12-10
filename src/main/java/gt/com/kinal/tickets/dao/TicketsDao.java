@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
@@ -19,12 +20,11 @@ import javax.persistence.Query;
  * @author jose
  */
 public class TicketsDao {
+    @PersistenceContext
     EntityManager em;
     
     public List<AtTicket> getTickets() {
         // logica para obtener tickets de bd
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ticketsPU");
-        em = emf.createEntityManager();
         Query queryTickets = em.createNamedQuery("AtTicket.findAll");
         List<AtTicket> tickets = queryTickets.getResultList();
         

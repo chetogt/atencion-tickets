@@ -43,15 +43,11 @@ public class AtTecnico implements Serializable {
     @Column(name = "tecnico_id")
     private Integer tecnicoId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable=false, length=100)
     private String nombre;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "email")
+    @Column(name = "email", nullable=false, length=100)
     private String email;
     @OneToMany(mappedBy = "tecnico")
     private List<AtTicket> tickets;

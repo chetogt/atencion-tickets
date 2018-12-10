@@ -48,18 +48,13 @@ public class AtTicket implements Serializable {
     @Column(name = "ticket_id")
     private Integer ticketId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "asunto")
+    @Column(name = "asunto", nullable=false, length=50)
     private String asunto;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 500)
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", nullable=false, length=50)
     private String descripcion;
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "estado")
+    @Column(name = "estado", nullable=false)
     private String estado;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)

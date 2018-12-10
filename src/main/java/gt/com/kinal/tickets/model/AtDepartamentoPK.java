@@ -19,12 +19,10 @@ import javax.validation.constraints.NotNull;
 public class AtDepartamentoPK implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "empresa_id")
+    @Column(name = "empresa_id", nullable=false)
     private int empresaId;
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "departamento_id")
+    @Column(name = "departamento_id", nullable=false)
     private int departamentoId;
 
     public AtDepartamentoPK() {
