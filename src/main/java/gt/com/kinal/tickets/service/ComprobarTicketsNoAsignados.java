@@ -7,6 +7,7 @@ package gt.com.kinal.tickets.service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.ScheduleExpression;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.Timeout;
@@ -25,7 +26,9 @@ public class ComprobarTicketsNoAsignados {
 
     @PostConstruct
     public void initialize() {
-        timerService.createTimer(0, 10000, "TICKETS_NO_ASIGNADOS");
+        ScheduleExpression schedule = new ScheduleExpression();
+        schedule.hour("*").minute("*").second("*/10");
+        timerService.createCalendarTimer(schedule);
     }
 
     @Timeout
