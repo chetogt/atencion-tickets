@@ -1,4 +1,4 @@
-package com.airhacks;
+package gt.com.kinal.tickets.rs;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

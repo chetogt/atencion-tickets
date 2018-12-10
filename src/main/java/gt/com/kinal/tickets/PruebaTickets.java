@@ -7,8 +7,12 @@ package gt.com.kinal.tickets;
 
 import gt.com.kinal.tickets.model.AtTicket;
 import gt.com.kinal.tickets.model.AtTecnico;
+import gt.com.kinal.tickets.service.TicketsServiceImpl;
 import java.util.Date;
 import java.util.List;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.se.SeContainer;
+import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -23,14 +27,26 @@ import javax.persistence.criteria.Root;
  * @author jose
  */
 public class PruebaTickets {
+    TicketsServiceImpl ticketsService;
+    
+    public void probarEjb() {
+        SeContainerInitializer initializer = SeContainerInitializer.newInstance();
+        try (SeContainer initialize = initializer.initialize()) {
+            Instance<TicketsServiceImpl> instance = initialize.select(TicketsServiceImpl.class);
+
+            TicketsServiceImpl ticketsService = instance.get();
+            List<AtTicket> tickets = ticketsService.getTickets();
+            System.out.println("Tickets encontrados: " + tickets.size());
+        }
+    }
+    
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ticketsPU");
+        /*EntityManagerFactory emf = Persistence.createEntityManagerFactory("ticketsPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         
         tx.begin();
         // todo lo que se encuentra acá está dentro de la transacción
-        /*
         // INSERT
         AtTicket ticket = new AtTicket("Navegacion", "No puedo ingresar a pagina de Banguat (DEL)", "C", new Date());
         em.persist(ticket);
@@ -42,7 +58,7 @@ public class PruebaTickets {
         ticket.setEstado("A");
         
         // DELETE
-        em.remove(ticket);*/
+        em.remove(ticket);
         
         // consulta utilizando NamedQueries
         Query queryTickets = em.createNamedQuery("AtTicket.findAll");
@@ -83,6 +99,9 @@ public class PruebaTickets {
         tx.commit();
         System.out.println("Transaccion ejecutada");
         em.close();
-        emf.close();
+        emf.close();*/
+        
+        PruebaTickets app = new PruebaTickets();
+        app.probarEjb();
     }
 }

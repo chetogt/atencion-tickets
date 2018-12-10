@@ -36,12 +36,9 @@ public class AtDepartamento implements Serializable {
     @EmbeddedId
     protected AtDepartamentoPK atDepartamentoPK;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable=false, length=50)
     private String nombre;
-    @Size(max = 25)
-    @Column(name = "telefono")
+    @Column(name = "telefono", length=50)
     private String telefono;
 
     public AtDepartamento() {
