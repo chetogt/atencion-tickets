@@ -6,6 +6,8 @@
 package gt.com.kinal.tickets.soap;
 
 import gt.com.kinal.tickets.domain.Tecnico;
+import gt.com.kinal.tickets.service.TecnicosServiceImpl;
+import javax.inject.Inject;
 import javax.jws.WebService;
 
 /**
@@ -14,8 +16,12 @@ import javax.jws.WebService;
  */
 @WebService
 public class TicketsSoapResource {
+    @Inject
+    TecnicosServiceImpl tecnicosService;
+
     public Integer asignarTickets(Tecnico tecnico) {
         Integer codigoRespuesta = 3;
+        codigoRespuesta = tecnicosService.asignTickets(tecnico);
         return codigoRespuesta;
     }
 }
