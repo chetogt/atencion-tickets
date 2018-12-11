@@ -18,6 +18,8 @@
     <h:body>
         <h:messages globalOnly="true" id="result" />
         <br/>
+        <h:button outcome="cliente/crear-ticket.jsf" value="Crear ticket"/>
+        <br/>
         <h:form>
             <h:dataTable value="#{ticketsBacking.tickets}" var="t">
                 <h:column>
@@ -44,11 +46,11 @@
                         <f:ajax execute="@form" render="@form :result"/>
                     </h:commandButton>
                 </h:column>
-
             </h:dataTable>
+            <br/>
+            <h:commandButton action="#{ticketsBacking.logout}" value="Salir"/>
         </h:form>
         <br/>
-        <h:button outcome="crear-ticket.jsf" value="Crear ticket"/>
     </h:body>
 </html>
 

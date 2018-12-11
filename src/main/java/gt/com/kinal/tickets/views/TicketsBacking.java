@@ -16,6 +16,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -56,7 +58,7 @@ public class TicketsBacking {
         
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ticket creado exitosamente"));
         
-	return "listado-tickets.jsf";
+	return "/protected/listado-tickets.jsf";
     }
     
     public String cerrarTicket() {
@@ -70,7 +72,19 @@ public class TicketsBacking {
         
         return null;
     }
-
+    
+    public String logout() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        try {
+          request.logout();
+          return "/login.jsf?faces-redirect=true";
+        } catch (ServletException e) {
+          e.printStackTrace();
+          context.addMessage(null, new FacesMessage("Logout failed."));
+        }
+        return "/protected/listado-tickets.jsf";
+    }
 
     public String getAsunto() {
         return asunto;

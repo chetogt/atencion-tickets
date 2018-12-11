@@ -18,7 +18,49 @@
             30
         </session-timeout>
     </session-config>
+    <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>protected</web-resource-name>
+        <url-pattern>/protected/*</url-pattern>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
+        <http-method>DELETE</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>CLIENTE</role-name>
+        <role-name>TECNICO</role-name>
+    </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>cliente</web-resource-name>
+        <url-pattern>/protected/cliente/*</url-pattern>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
+        <http-method>DELETE</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>CLIENTE</role-name>
+    </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <role-name>CLIENTE</role-name>
+    </security-role>
+    <security-role>
+        <role-name>TECNICO</role-name>
+    </security-role>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>ticketsRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsf</form-login-page>
+            <form-error-page>/error.jsf</form-error-page>
+        </form-login-config>
+    </login-config>
     <welcome-file-list>
-        <welcome-file>listado-tickets.jsf</welcome-file>
+        <welcome-file>protected/listado-tickets.jsf</welcome-file>
     </welcome-file-list>
 </web-app>
