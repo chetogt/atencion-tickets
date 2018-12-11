@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Listado de tickets</title>
+        <style>
+	table, tr, td {
+            border: 1px solid #cecece;
+	}
+        thead {
+            background-color: #acac;
+	}
+        </style>
+    </h:head>
+    <h:body>
+        <h:messages globalOnly="true" />
+        <br/>
+        <h:dataTable value="#{ticketsBacking.tickets}" var="t">
+            <h:column>
+                <f:facet name="header">Asunto</f:facet>
+                #{t.asunto}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Descripcion</f:facet>
+                #{t.descripcion}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Fecha de creacion</f:facet>
+                #{t.fechaCreacion}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Estado</f:facet>
+                <h:outputText value="#{t.estado}">
+                    <f:converter converterId="estadoConverter"/>
+                </h:outputText>
+            </h:column>
+	</h:dataTable>
+        <br/>
+        <h:button outcome="crear-ticket.jsf" value="Crear ticket"/>
+    </h:body>
+</html>
+

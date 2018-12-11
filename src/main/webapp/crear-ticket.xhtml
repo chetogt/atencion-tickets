@@ -11,13 +11,15 @@
         <h1>Sistema para atención de Tickets</h1>
 	<h:form>
             <h:outputLabel value="Asunto"/>
-            <h:inputText id="txtAsunto" value="#{ticketsBacking.asunto}" />
+            <h:inputText id="txtAsunto" value="#{ticketsBacking.asunto}" required="true" requiredMessage="Debe ingresar el asunto" />
             <br/>
             <h:outputLabel value="Descripcion"/>
-            <h:inputTextarea id="txtDescripcion" value="#{ticketsBacking.descripcion}" />
+            <h:inputTextarea id="txtDescripcion" value="#{ticketsBacking.descripcion}" required="true" requiredMessage="Debe ingresar la descripcion" />
             <br/>
             <h:commandButton id="btnEnviar" value="Enviar" action="#{ticketsBacking.crearTicket}"/>
         </h:form>
+        <br/>
+        <h:button outcome="listado-tickets.jsf" value="Regresar"/>
     </h:body>
 </html>
 

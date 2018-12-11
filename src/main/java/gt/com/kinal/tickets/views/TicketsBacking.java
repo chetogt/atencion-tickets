@@ -8,7 +8,11 @@ package gt.com.kinal.tickets.views;
 import gt.com.kinal.tickets.model.AtTicket;
 import gt.com.kinal.tickets.service.TicketsServiceImpl;
 import java.util.Date;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -24,10 +28,16 @@ public class TicketsBacking {
     
     String asunto;
     String descripcion;
+    List<AtTicket> tickets;
 
     public TicketsBacking() {
     }
     
+    @PostConstruct
+    public void inicializarTickets() {
+        tickets = ticketsService.getTickets();
+    }
+
     public String crearTicket() {
 	// validaciones
         // completar campos obligatorios
@@ -37,8 +47,15 @@ public class TicketsBacking {
         ticket.setEstado("C");
         ticket.setFechaCreacion(new Date());
         ticketsService.createTicket(ticket);
+        // limpiar campos
+        asunto = null;
+        descripcion = null;
         
-	return "crear-ticket.jsf";
+        tickets = ticketsService.getTickets();
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ticket creado exitosamente"));
+        
+	return "listado-tickets.jsf";
     }
 
     public String getAsunto() {
@@ -55,5 +72,13 @@ public class TicketsBacking {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<AtTicket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<AtTicket> tickets) {
+        this.tickets = tickets;
     }
 }
