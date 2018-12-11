@@ -27,4 +27,10 @@ public class TicketsServiceImpl {
     public AtTicket createTicket(AtTicket ticket) {
         return ticketsDao.save(ticket);
     }
+
+    public AtTicket closeTicket(Integer ticketId) {
+        AtTicket ticket = ticketsDao.get(ticketId);
+        ticket.setEstado("R");
+        return ticket;
+    }
 }

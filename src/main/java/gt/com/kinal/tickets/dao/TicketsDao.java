@@ -35,4 +35,8 @@ public class TicketsDao {
         em.persist(ticket);
         return ticket;
     }
+    
+    public AtTicket get(Integer ticketId) {
+        return em.find(AtTicket.class, ticketId);
+    }
 }

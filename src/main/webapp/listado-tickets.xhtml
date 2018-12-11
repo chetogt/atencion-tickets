@@ -13,30 +13,40 @@
             background-color: #acac;
 	}
         </style>
+        <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
     </h:head>
     <h:body>
-        <h:messages globalOnly="true" />
+        <h:messages globalOnly="true" id="result" />
         <br/>
-        <h:dataTable value="#{ticketsBacking.tickets}" var="t">
-            <h:column>
-                <f:facet name="header">Asunto</f:facet>
-                #{t.asunto}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Descripcion</f:facet>
-                #{t.descripcion}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Fecha de creacion</f:facet>
-                #{t.fechaCreacion}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Estado</f:facet>
-                <h:outputText value="#{t.estado}">
-                    <f:converter converterId="estadoConverter"/>
-                </h:outputText>
-            </h:column>
-	</h:dataTable>
+        <h:form>
+            <h:dataTable value="#{ticketsBacking.tickets}" var="t">
+                <h:column>
+                    <f:facet name="header">Asunto</f:facet>
+                    #{t.asunto}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descripcion</f:facet>
+                    #{t.descripcion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fecha de creacion</f:facet>
+                    #{t.fechaCreacion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Estado</f:facet>
+                    <h:outputText value="#{t.estado}">
+                        <f:converter converterId="estadoConverter"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Cerrar" action="#{ticketsBacking.cerrarTicket}">
+                        <f:param name="ticketId" value="#{t.ticketId}"/>
+                        <f:ajax execute="@form" render="@form :result"/>
+                    </h:commandButton>
+                </h:column>
+
+            </h:dataTable>
+        </h:form>
         <br/>
         <h:button outcome="crear-ticket.jsf" value="Crear ticket"/>
     </h:body>

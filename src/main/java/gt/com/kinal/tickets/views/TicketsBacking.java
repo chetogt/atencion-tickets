@@ -9,6 +9,7 @@ import gt.com.kinal.tickets.model.AtTicket;
 import gt.com.kinal.tickets.service.TicketsServiceImpl;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -57,6 +58,19 @@ public class TicketsBacking {
         
 	return "listado-tickets.jsf";
     }
+    
+    public String cerrarTicket() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        Integer ticketId = Integer.valueOf(params.get("ticketId").toString());
+        ticketsService.closeTicket(ticketId);
+
+        tickets = ticketsService.getTickets();
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ticket cerrado exitosamente"));
+        
+        return null;
+    }
+
 
     public String getAsunto() {
         return asunto;
