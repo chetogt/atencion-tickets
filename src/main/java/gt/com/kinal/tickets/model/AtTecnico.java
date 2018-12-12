@@ -49,8 +49,8 @@ public class AtTecnico implements Serializable {
     @Basic(optional = false)
     @Column(name = "email", nullable=false, length=100)
     private String email;
-    @OneToMany(mappedBy = "tecnico")
-    private List<AtTicket> tickets;
+    /*@OneToMany(mappedBy = "tecnico")
+    private List<AtTicket> tickets;*/
 
     public AtTecnico() {
     }
@@ -94,14 +94,14 @@ public class AtTecnico implements Serializable {
         this.email = email;
     }
 
-    @XmlTransient
+    /*@XmlTransient
     public List<AtTicket> getTickets() {
         return tickets;
     }
 
     public void setTickets(List<AtTicket> tickets) {
         this.tickets = tickets;
-    }
+    }*/
 
     @Override
     public int hashCode() {

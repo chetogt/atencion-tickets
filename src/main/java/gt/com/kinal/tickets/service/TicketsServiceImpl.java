@@ -33,4 +33,22 @@ public class TicketsServiceImpl {
         ticket.setEstado("R");
         return ticket;
     }
+    
+    public AtTicket getTicket(Integer id) {
+        return ticketsDao.get(id);
+    }
+    
+    public AtTicket updateTicket(Integer id, AtTicket ticket) {
+        // obtener ticket original
+        AtTicket ticketEncontrado = ticketsDao.get(id);
+        // comparar atributos para encontrar cambios
+        // aplicar cambios
+        ticketEncontrado.setAsunto(ticket.getAsunto());
+        ticketEncontrado.setDescripcion(ticket.getDescripcion());
+        return ticketEncontrado;
+    }
+
+    public List<AtTicket> getTicketsByEstado(String estado) {
+        return ticketsDao.getTicketsByEstado(estado);
+    }
 }

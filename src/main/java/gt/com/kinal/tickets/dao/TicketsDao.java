@@ -39,4 +39,11 @@ public class TicketsDao {
     public AtTicket get(Integer ticketId) {
         return em.find(AtTicket.class, ticketId);
     }
+    
+    public List<AtTicket> getTicketsByEstado(String estado) {
+        Query queryTickets = em.createNamedQuery("AtTicket.findByEstado");
+        queryTickets.setParameter("estado", estado);
+        List<AtTicket> tickets = queryTickets.getResultList();
+        return tickets;
+    }
 }
